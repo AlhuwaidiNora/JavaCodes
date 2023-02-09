@@ -1,0 +1,44 @@
+Java Code that generates random "abstract" images using the JavaFX library:
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+
+import java.util.Random;
+
+public class AbstractArt extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        Random random = new Random();
+        Canvas canvas = new Canvas(500, 500);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        for (int i = 0; i < 100; i++) {
+            int x1 = random.nextInt(500);
+            int y1 = random.nextInt(500);
+            int x2 = random.nextInt(500);
+            int y2 = random.nextInt(500);
+            int lineWidth = random.nextInt(10) + 1;
+            int red = random.nextInt(255);
+            int green = random.nextInt(255);
+            int blue = random.nextInt(255);
+            gc.setStroke(Color.rgb(red, green, blue));
+            gc.setLineWidth(lineWidth);
+            gc.strokeLine(x1, y1, x2, y2);
+        }
+
+        StackPane root = new StackPane();
+        root.getChildren().add(canvas);
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+}
